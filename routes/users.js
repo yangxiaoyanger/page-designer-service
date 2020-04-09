@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var db = require("../config/db");
+
 var widegts = {
   "top": 0, 
   "zoom": 100, 
@@ -442,6 +444,23 @@ var widegts = {
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
+
+// 新增组件
+router.post('/saveWidgets', function (req, res) {
+  var pageid = req.body.pageid;
+  var pagename = req.body.pagename;
+  var url = req.body.url;
+  var widgets = req.body.widgets;
+  db.query("insert into page(pageid,pagename,url,widgets) values('" + pageid + "','" + pagename 
+    + "','" + url + "','" + widgets + "')", function (err, rows) {
+      if (err) {
+          res.end('新增失败：' + err);
+      } else {
+        res.end('新增成功');
+      }
+  })
+});
+
 
 
 /* GET users listing. */

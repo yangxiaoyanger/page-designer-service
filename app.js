@@ -24,30 +24,12 @@ app.all('*',function (req, res, next) {
   res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With');
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   if (req.method == 'OPTIONS') {
-    res.send(200);
+    res.send((200).toString());
   }
   else {
     next();
   }
 });
-
-
-//加载mysql模块
-var mysql = require('mysql');
-//创建连接
-var connection = mysql.createConnection({
-host     : 'localhost',
-user     : 'root',
-password : '',
-port: '3306',
-database : 'vuepage'
-});
-//执行创建连接 
-connection.connect();
-// //SQL语句
-// var  sql = 'SELECT * FROM page';
-// var  addSql = 'INSERT INTO page(pageid,pagename,url) VALUES(?,?,?)';
-
 
 app.use(logger('dev'));
 app.use(express.json());
