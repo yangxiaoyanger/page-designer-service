@@ -401,8 +401,8 @@ var widegts = {
           "text": "表格", 
           "belong": "1e66f094fa", 
           "animationName": "", 
-          "columns": "[{\"title\":\"Name\",\"key\":\"name\"},{\"title\":\"Age\",\"key\":\"age\"},{\"title\":\"Address\",\"key\":\"address\"}]", 
-          "data": "[{\"name\":\"John Brown\",\"age\":18,\"address\":\"New York No. 1 Lake Park\",\"date\":\"2016-10-03\"},{\"name\":\"Jim Green\",\"age\":24,\"address\":\"London No. 1 Lake Park\",\"date\":\"2016-10-01\"},{\"name\":\"Joe Black\",\"age\":30,\"address\":\"Sydney No. 1 Lake Park\",\"date\":\"2016-10-02\"},{\"name\":\"Jon Snow\",\"age\":26,\"address\":\"Ottawa No. 2 Lake Park\",\"date\":\"2016-10-04\"}]", 
+          "columns": [{"title":"Name","key":"name"},{"title":"Age","key":"age"},{"title":"Address","key":"address"}], 
+          "data": [{"name":"John Brown","age":18,"address":"New York No. 1 Lake Park","date":"2016-10-03"},{"name":"Jim Green","age":24,"address":"London No. 1 Lake Park","date":"2016-10-01"},{"name":"Joe Black","age":30,"address":"Sydney No. 1 Lake Park","date":"2016-10-02"},{"name":"Jon Snow","age":26,"address":"Ottawa No. 2 Lake Park","date":"2016-10-04"}], 
           "offsetTop": 481, 
           "offsetLeft": 81, 
           "uuid": "表格4703101d61"
@@ -460,6 +460,20 @@ router.post('/saveWidgets', function (req, res) {
       }
   })
 });
+
+// 查询组件
+router.get('/getWidgets2', function (req, res) {
+    var pageid = req.body.pageid;
+    db.query("SELECT * FROM page", function (err, rows) {
+        if (err) {
+            res.end('查询失败：' + err);
+        } else {
+            console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+            console.log(JSON.stringify(rows), 888888)
+          res.end(JSON.stringify(rows));
+        }
+    })
+  });
 
 
 
